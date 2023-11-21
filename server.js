@@ -27,7 +27,7 @@ const handle_Find = function(res, criteria, callback){
     	try{
         	const searchResult = await Items.find(criteria).lean().exec();
         	console.log(searchResult);
-    		callback(searchResult);
+    		return callback(searchResult);
         }catch(err){
         	console.error(err);
         	console.log("Error occurred");
@@ -40,13 +40,14 @@ const handle_Find = function(res, criteria, callback){
 
 app.get('/home', function(req, res){
     console.log("...Welcome to the home page!");
-    const allItems = handle_Find(res,{});
-    var amount = allItems.length;
-    var quantity = 0;
-    for (var item in allItems){
-    	quantity+=item.quantity;
-    }
-    return res.status(200).render("home", {quantity: quantity, amount: amount, foundItems: allItems});
+    handle_Find(res,{}, function(allItems){
+        var amount = allItems.length;
+        var quantity = 0;
+        for (var item in allItems){
+        	quantity+=item.quantity;
+        }
+        return res.status(200).render("home", {quantity: quantity, amount: amount, foundItems: allItems});
+    });
 });
 
 app.listen(process.env.PORT || 8099);
