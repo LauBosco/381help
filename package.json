@@ -1,0 +1,22 @@
+{
+    "name": "server",
+    "description": "COMPS381F project - inventory management system",
+    "author": "Lau Lok Lam, , ",
+    "version": "0.0.1",
+    "engines": {
+		"node": ">=8.0.0",
+		"npm": ">=6.0.0"
+	},
+    "dependencies": {
+        "cookie-session": "latest",
+        "body-parser": "^1.18.3",
+        "ejs": "*",
+        "express": "*",
+        "mongodb": "*",
+        "assert": "^1.4.1",
+        "mongoose": "^7.5.4"
+    },
+    "scripts": {
+        "start": "node server.js"
+    }
+}
