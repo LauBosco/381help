@@ -23,10 +23,9 @@ const handle_Find = function(res, criteria, callback){
     db.on('error', console.error.bind(console, 'connection error'));
     db.once('open', async () => {
     	let Items = mongoose.model('Items', itemSchema);
-    
     	try{
         	const searchResult = await Items.find(criteria).lean().exec();
-        	console.log(searchResult);
+        	//console.log(searchResult);
     		return callback(searchResult);
         }catch(err){
         	console.error(err);
@@ -44,7 +43,7 @@ app.get('/home', function(req, res){
         var amount = allItems.length;
         var quantity = 0;
         for (var item in allItems){
-        	quantity+=item.quantity;
+        	quantity+=allItems[item]["quantity"];
         }
         return res.status(200).render("home", {quantity: quantity, amount: amount, foundItems: allItems});
     });
