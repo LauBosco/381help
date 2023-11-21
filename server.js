@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true}));
 
-const handle_Find = function(res, criteria){
+const handle_Find = function(res, criteria, callback){
     mongoose.connect(mongourl);
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error'));
@@ -27,7 +27,7 @@ const handle_Find = function(res, criteria){
     	try{
         	const searchResult = await Items.find(criteria).lean().exec();
         	console.log(searchResult);
-    		return searchResult;
+    		return callback(searchResult);
         }catch(err){
         	console.error(err);
         	console.log("Error occurred");
