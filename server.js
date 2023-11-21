@@ -27,7 +27,7 @@ const handle_Find = function(res, criteria, callback){
     	try{
         	const searchResult = await Items.find(criteria).lean().exec();
         	console.log(searchResult);
-    		return callback(searchResult);
+    		callback(searchResult);
         }catch(err){
         	console.error(err);
         	console.log("Error occurred");
